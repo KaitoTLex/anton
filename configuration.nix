@@ -117,10 +117,10 @@
     obs-studio
   ];
   programs = {
-    # gamescope = {
-    #   enable = true;
-    #   capSysNice = true;
-    # };
+    gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
     steam = {
       enable = true;
       #gamescopeSession.enable = true;
@@ -132,11 +132,10 @@
       # ];
     };
   };
-  #hardware.xone.enable = true; # support for the xbox controller USB dongle
+  hardware.xone.enable = true; # support for the xbox controller USB dongle
   # services.getty.autologinUser = "kaitotlex";
-  # environment = {
-  #   loginShellInit = ''
-  #     [[ "$(tty)" = "/dev/tty1" ]] && ./gs.sh
+  # environment.loginShellInit = ''
+  #     ./gs.sh
   #   '';
   # };
   services.udev.packages = with pkgs; [
