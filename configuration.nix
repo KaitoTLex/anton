@@ -11,19 +11,19 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    inputs.ucodenix.nixosModules.default
+    #inputs.ucodenix.nixosModules.default
     ./hardware-configuration.nix
   ];
-  services.ucodenix.enable = true;
+  #services.ucodenix.enable = true;
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   #boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
-  virtualisation.waydroid.enable = true;
+  #virtualisation.waydroid.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   #systemdefaults
   networking.hostName = "anton"; # Define your hostname.
-  services.ratbagd.enable = true;
+  #services.ratbagd.enable = true;
 
   hardware.pulseaudio.support32Bit = true;
   # boot.kernelParams = [
@@ -61,7 +61,7 @@
 
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = lib.mkForce true;
+    powerManagement.finegrained = false;
 
     # Use the NVidia open source kernel module (not to be confused with the
     # independent third-party "nouveau" open source driver).
@@ -79,14 +79,14 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.beta;
     #Power Saving Features
-    prime = {
-      offload.enable = lib.mkForce true;
-      # Make sure to use the correct Bus ID values for your system!
-      #intelBusId = "PCI:";
-      nvidiaBusId = "PCI:1:0:0";
-      amdgpuBusId = "PCI:8:0:0";
-    };
-
+    # prime = {
+    #   offload.enable = lib.mkForce true;
+    #   # Make sure to use the correct Bus ID values for your system!
+    #   #intelBusId = "PCI:";
+    #   nvidiaBusId = "PCI:1:0:0";
+    #   amdgpuBusId = "PCI:8:0:0";
+    # };
+    #
   };
   # Config Gaming
   services.desktopManager.plasma6.enable = true;
