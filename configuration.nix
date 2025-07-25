@@ -90,15 +90,40 @@
     #
   };
   # Config Gaming
-  services.desktopManager.plasma6.enable = true;
+  services = {
+    desktopManager.plasma6.enable = true;
+
+    displayManager.sddm.enable = true;
+
+    displayManager.sddm.wayland.enable = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    kdePackages.discover # Optional: Install if you use Flatpak or fwupd firmware update sevice
+    kdePackages.kcalc # Calculator
+    kdePackages.kcharselect # Tool to select and copy special characters from all installed fonts
+    kdePackages.kcolorchooser # A small utility to select a color
+    kdePackages.kolourpaint # Easy-to-use paint program
+    kdePackages.ksystemlog # KDE SystemLog Application
+    kdePackages.sddm-kcm # Configuration module for SDDM
+    kdiff3 # Compares and merges 2 or 3 files or directories
+    kdePackages.isoimagewriter # Optional: Program to write hybrid ISO files onto USB disks
+    kdePackages.partitionmanager # Optional Manage the disk devices, partitions and file systems on your computer
+    hardinfo2 # System information and benchmarks for Linux systems
+    haruna # Open source video player built with Qt/QML and libmpv
+    wayland-utils # Wayland utilities
+    wl-clipboard # Command-line copy/paste utilities for Wayland
+    mangohud
+    obs-studio
+  ];
   programs = {
-    gamescope = {
-      enable = true;
-      capSysNice = true;
-    };
+    # gamescope = {
+    #   enable = true;
+    #   capSysNice = true;
+    # };
     steam = {
       enable = true;
-      gamescopeSession.enable = true;
+      #gamescopeSession.enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
@@ -107,13 +132,13 @@
       # ];
     };
   };
-  hardware.xone.enable = true; # support for the xbox controller USB dongle
-  services.getty.autologinUser = "kaitotlex";
-  environment = {
-    loginShellInit = ''
-      [[ "$(tty)" = "/dev/tty1" ]] && ./gs.sh
-    '';
-  };
+  #hardware.xone.enable = true; # support for the xbox controller USB dongle
+  # services.getty.autologinUser = "kaitotlex";
+  # environment = {
+  #   loginShellInit = ''
+  #     [[ "$(tty)" = "/dev/tty1" ]] && ./gs.sh
+  #   '';
+  # };
   services.udev.packages = with pkgs; [
     game-devices-udev-rules
   ];
@@ -184,17 +209,17 @@
   programs.rog-control-center.enable = true;
 
   #System specific packages to install
-  environment.systemPackages = with pkgs; [
-    mangohud
-    # nvtop
-    #osu-lazer
-    #davinci-resolve
-    #wacomtablet
-    obs-studio
-    #asusctl
-    #supergfxctl
-    #thinkfan
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   mangohud
+  #   # nvtop
+  #   #osu-lazer
+  #   #davinci-resolve
+  #   #wacomtablet
+  #   obs-studio
+  #   #asusctl
+  #   #supergfxctl
+  #   #thinkfan
+  # ];
 
   # List services that you want to enable:
   # services.actkbd = {
